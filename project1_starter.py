@@ -64,7 +64,7 @@ def save_character(character, filename):
     # TODO: Implement this function
     # Remember to handle file errors gracefully
     #save_file = open(filename,"w")
-    if len(character) <= 5:
+    if len(character) <= 5 or not os.path.exists(filename):
         return False
     with open(filename, "w") as file: # Creates a new file or if file exists writes over existing data
         string_to_write = f"Character Name: {character['name']}\nClass: {character['class']}\nLevel: {character['level']}\nStrength: {character['strength']}\nMagic: {character['magic']}\nHealth: {character['health']}\nGold: {character['gold']}"
@@ -152,7 +152,7 @@ if __name__ == "__main__":
     print("Test your functions here!")
     
     # Example usage:
-    char = create_character("TestHero", "nil")
+    char = create_character("TestHero", "Mage")
     display_character(char)
     save_character(char, "my_character.txt")
     loaded = load_character("my_character.txt")
