@@ -39,7 +39,9 @@ def calculate_stats(character_class, level):
     character_class = character_class.lower()
     level_multiplier = 1 + (level/10)
     class_stats = {"warrior":{"strength": 20, "magic": 5, "health": 100}, "mage": {"strength": 10, "magic": 30, "health": 70},
-                      "rouge": {"strength": 15, "magic": 15, "health": 50}, "cleric":{"strength": 15, "magic": 20, "health": 120}}
+                      "rogue": {"strength": 15, "magic": 15, "health": 50}, "cleric":{"strength": 15, "magic": 20, "health": 120}}
+    if not class_stats.get(character_class): # If class is not found then default to warrior class
+        character_class = "warrior"
     stats_with_multi = {"strength": class_stats[character_class]["strength"] * level_multiplier, "magic": class_stats[character_class]["magic"] * level_multiplier, "health": class_stats[character_class]["health"] * level_multiplier}
     return (round(stats_with_multi["strength"], 2), round(stats_with_multi["magic"], 2), int(stats_with_multi["health"]))
     
@@ -150,7 +152,7 @@ if __name__ == "__main__":
     print("Test your functions here!")
     
     # Example usage:
-    char = create_character("TestHero", "Warrior")
+    char = create_character("TestHero", "nil")
     display_character(char)
     save_character(char, "my_character.txt")
     loaded = load_character("my_character.txt")
