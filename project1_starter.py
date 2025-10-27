@@ -64,13 +64,17 @@ def save_character(character, filename):
     # TODO: Implement this function
     # Remember to handle file errors gracefully
     #save_file = open(filename,"w")
-    if len(character) <= 5 or not os.path.exists(filename):
+    if len(character) <= 5:
+        print("Error: Save data too short")
+        return False
+    elif (filename.find("\\") > 0 or filename.find("/") > 0) and (not os.path.exists(filename)):
+        print("Error: File does not exist")
         return False
     with open(filename, "w") as file: # Creates a new file or if file exists writes over existing data
         string_to_write = f"Character Name: {character['name']}\nClass: {character['class']}\nLevel: {character['level']}\nStrength: {character['strength']}\nMagic: {character['magic']}\nHealth: {character['health']}\nGold: {character['gold']}"
         file.write(string_to_write)
         
-    return True
+        return True
 
 def load_character(filename):
     """
