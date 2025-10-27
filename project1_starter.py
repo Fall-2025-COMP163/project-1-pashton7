@@ -64,13 +64,18 @@ def save_character(character, filename):
     # TODO: Implement this function
     # Remember to handle file errors gracefully
     #save_file = open(filename,"w")
+    
     if len(character) <= 5:
-        print("Error: Save data too short")
+        print("ERROR: Save data too short")
         return False
-    elif (filename.find("\\") > 0 or filename.find("/") > 0) and (not os.path.exists(filename)):
-        print("Error: File does not exist")
+    elif (not os.path.exists(filename)) and filename.find("/") > -1:
+        print("ERROR: File does not exist")
         return False
     with open(filename, "w") as file: # Creates a new file or if file exists writes over existing data
+        str.isascii
+        if not character['name'].isascii():
+            print("ERROR: Name cannot include special characters")
+            return False
         string_to_write = f"Character Name: {character['name']}\nClass: {character['class']}\nLevel: {character['level']}\nStrength: {character['strength']}\nMagic: {character['magic']}\nHealth: {character['health']}\nGold: {character['gold']}"
         file.write(string_to_write)
         
@@ -156,8 +161,8 @@ if __name__ == "__main__":
     print("Test your functions here!")
     
     # Example usage:
-    char = create_character("TestHero", "Mage")
+    char = create_character("李小龙", "Mage")
     display_character(char)
-    save_character(char, "my_character.txt")
+    save_character(char, "test.txt")
     loaded = load_character("my_character.txt")
     level_up(char)
